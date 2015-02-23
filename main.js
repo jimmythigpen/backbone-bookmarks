@@ -9,6 +9,7 @@
 // Bookmark Collection
 //
 
+
 //
 // Tag View
 //
@@ -39,11 +40,22 @@ var BookMarkView = Backbone.View.extend({
   }
 
 
+
 });
 
 //
 // Bookmark Item View
 //
+var BookMarkItemView = Backbone.View.extend({
+  tagName: 'li',
+  template: _.template($('#bookmark-item-template')),
+
+  render: function(){
+    this.$el.html(this.template(this.model.toJSON));
+    return this;
+  }
+
+});
 
 //
 // Router
@@ -57,6 +69,19 @@ var AppRouter = Backbone.Router.extend({
   initialize: function(){
     this.tagView = new TagView({el: '.app-container'});
     this.bookMarkView = new BookMarkView({el: '.app-container'});
+    this.bookmarks = new Backbone.Collection([
+      {
+        title: 'Google',
+        url: 'https://www.google.com',
+        description: 'The best search engine in the world',
+        tags: ['search', 'maps', 'gmail', 'news', 'drive', 'weather']
+      },
+      {
+        title: 'Facebook',
+        url: 'https://www.facebook.com',
+        description: 'Connect and share with friends around the world',
+        tags: ['friends', 'photos']
+      }]);
   },
 
   index: function(){

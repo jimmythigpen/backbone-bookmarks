@@ -17,9 +17,18 @@
 
 <script type="text/template" id="bookmark-template">
 <div>
-<ul>Bookmark</ul>
+<ul class="js-bookmark-list"></ul>
 </div>
 </script>
+
+<script type="text/template" id="bookmark-item-template">
+<%= title %>
+<%= url %>
+<%= description %>
+<%= tags %>
+</script>
+
+
 
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/underscore/underscore.js"></script>
