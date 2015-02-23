@@ -36,11 +36,15 @@ var BookMarkView = Backbone.View.extend({
   template: _.template($('#bookmark-template').text()),
 
   render: function(){
-    this.$el.append(this.template());
+    var self = this;
+    this.$el.html(this.template());
+    this.children = this.collection.map(function(bookmark){
+      var bookMarkItemView = new BookMarkItemView({model: bookmark});
+      self.$('ul').append(bookMarkItemView.render().el);
+      // return bookMarkItemView;
+    });
+    // return this;
   }
-
-
-
 });
 
 //
@@ -48,10 +52,11 @@ var BookMarkView = Backbone.View.extend({
 //
 var BookMarkItemView = Backbone.View.extend({
   tagName: 'li',
-  template: _.template($('#bookmark-item-template')),
+  template: _.template($('#bookmark-item-template').text()),
 
   render: function(){
-    this.$el.html(this.template(this.model.toJSON));
+
+    this.$el.html(this.template(this.model.toJSON()));
     return this;
   }
 
@@ -67,8 +72,6 @@ var AppRouter = Backbone.Router.extend({
   },
 
   initialize: function(){
-    this.tagView = new TagView({el: '.app-container'});
-    this.bookMarkView = new BookMarkView({el: '.app-container'});
     this.bookmarks = new Backbone.Collection([
       {
         title: 'Google',
@@ -82,6 +85,9 @@ var AppRouter = Backbone.Router.extend({
         description: 'Connect and share with friends around the world',
         tags: ['friends', 'photos']
       }]);
+
+      this.tagView = new TagView({el: '.app-container'});
+      this.bookMarkView = new BookMarkView({el: '.js-bookmark-view', collection: this.bookmarks});
   },
 
   index: function(){
