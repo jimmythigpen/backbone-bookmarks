@@ -7,13 +7,13 @@
 </head>
 <body>
 
-<div class="js-tag-view"></div>
+<div class="js-tag-view tag-view"></div>
 
-<div class="js-bookmark-view"></div>
+<div class="js-bookmark-view bookmark-view"></div>
 
 <script type="text/template" id="tag-template">
 <div>
-<ul>Tag</ul>
+<ul></ul>
 </div>
 </script>
 
@@ -24,10 +24,10 @@
 </script>
 
 <script type="text/template" id="bookmark-item-template">
-<%= title %>
-<%= url %>
-<%= description %>
-<%= tags %>
+<h5><%= title %></h5>
+<div><a href="<%= url %>"><%= url %></a></div>
+<div><%= description %></div>
+<div><%= tags %></div>
 </script>
 
 <script type="text/template" id="tag-item-template">

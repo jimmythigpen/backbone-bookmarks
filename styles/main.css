@@ -1,3 +1,20 @@
+body {
+  text-align: center; }
 
+ul {
+  list-style-type: none;
+  padding: 0; }
+
+.tag-view {
+  display: inline-block;
+  border: 1px solid green;
+  width: 43%;
+  vertical-align: top; }
+
+.bookmark-view {
+  display: inline-block;
+  border: 1px solid black;
+  width: 43%;
+  vertical-align: top; }
 
 /*# sourceMappingURL=main.css.map */

@@ -20,11 +20,15 @@ var TagView = Backbone.View.extend({
   createTags: function(){
     this.tagArrays = this.collection.pluck('tags');
     this.tagArray = _.uniq(_.flatten(this.tagArrays));
+    this.tagObject = _.object(['tags'], [this.tagArray]);
+    this.collection.set(this.tagObject);
   },
 
+
   render: function(){
-    // console.log($.extend({}, this.tagArray));
-    this.children = this.tagArray.map(function(tag){
+    var self = this;
+    this.$el.html(this.template());
+      this.children = this.collection.map(function(tag){
       var tagItemView = new TagItemView({model: tag});
       self.$('ul').append(tagItemView.render().el);
     });
@@ -40,8 +44,7 @@ var TagItemView = Backbone.View.extend({
   template: _.template($('#tag-item-template').text()),
 
   render: function(){
-    console.log(this.model);
-    this.$el.html(this.template(this.model));
+    this.$el.html(this.template(this.model.toJSON()));
     return this;
 }
 
@@ -75,7 +78,6 @@ var BookMarkItemView = Backbone.View.extend({
   template: _.template($('#bookmark-item-template').text()),
 
   render: function(){
-
     this.$el.html(this.template(this.model.toJSON()));
     return this;
   }
@@ -97,14 +99,37 @@ var AppRouter = Backbone.Router.extend({
         title: 'Google',
         url: 'https://www.google.com',
         description: 'The best search engine in the world',
-        tags: ['search', 'maps', 'gmail', 'news', 'drive', 'weather', 'photos']
+        tags: ['search', 'maps', 'gmail', 'news', 'drive', 'weather']
       },
+
       {
         title: 'Facebook',
         url: 'https://www.facebook.com',
         description: 'Connect and share with friends around the world',
-        tags: ['friends', 'photos', 'news']
-      }]);
+        tags: ['friends', 'photos']
+      },
+
+      {
+        title: 'Weather',
+        url: 'https://www.weather.com',
+        description: 'Your local forecast from weather.com',
+        tags: ['weather', 'forecast']
+      },
+
+      {
+        title: 'CNN',
+        url: 'https://www.cnn.com',
+        description: 'International and local news coverage',
+        tags: ['news', 'photos']
+      },
+
+      {
+        title: 'Engadget',
+        url: 'https://www.engadget.com',
+        description: 'Tech news for the tech minded',
+        tags: ['news', 'photos', 'reviews']
+      }
+    ]);
 
       this.tagView = new TagView({el: '.js-tag-view', collection: this.bookmarks});
       this.bookMarkView = new BookMarkView({el: '.js-bookmark-view', collection: this.bookmarks});
