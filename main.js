@@ -15,18 +15,18 @@
 //
 var TagView = Backbone.View.extend({
 
-  template: _.template($('#tag-template').text()),
-
-  render: function(){
-    this.$el.html(this.template());
-  }
-
+createTags: function(){
+  this.tagArrays = this.collection.pluck('tags');
+  this.tagArray = _.uniq(_.flatten(this.tagArrays));
+  console.log(this.tagArray);
+},
 
 });
 
 //
 // Tag Item View
 //
+
 
 //
 // Bookmark View
@@ -77,23 +77,25 @@ var AppRouter = Backbone.Router.extend({
         title: 'Google',
         url: 'https://www.google.com',
         description: 'The best search engine in the world',
-        tags: ['search', 'maps', 'gmail', 'news', 'drive', 'weather']
+        tags: ['search', 'maps', 'gmail', 'news', 'drive', 'weather', 'photos']
       },
       {
         title: 'Facebook',
         url: 'https://www.facebook.com',
         description: 'Connect and share with friends around the world',
-        tags: ['friends', 'photos']
+        tags: ['friends', 'photos', 'news']
       }]);
 
-      this.tagView = new TagView({el: '.app-container'});
+      this.tagView = new TagView({el: '.js-tag-view', collection: this.bookmarks});
       this.bookMarkView = new BookMarkView({el: '.js-bookmark-view', collection: this.bookmarks});
+
   },
 
   index: function(){
     console.log('index');
-    this.tagView.render();
     this.bookMarkView.render();
+    this.tagView.createTags();
+
 
 
   },
