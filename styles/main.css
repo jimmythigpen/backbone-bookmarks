@@ -8,13 +8,15 @@ ul {
 .tag-view {
   display: inline-block;
   border: 1px solid green;
-  width: 43%;
+  border-radius: 5px;
+  width: 15%;
   vertical-align: top; }
 
 .bookmark-view {
   display: inline-block;
   border: 1px solid black;
-  width: 43%;
+  border-radius: 5px;
+  width: 40%;
   vertical-align: top; }
 
 /*# sourceMappingURL=main.css.map */

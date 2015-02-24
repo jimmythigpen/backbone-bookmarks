@@ -12,15 +12,11 @@
 <div class="js-bookmark-view bookmark-view"></div>
 
 <script type="text/template" id="tag-template">
-<div>
-<ul></ul>
-</div>
+
 </script>
 
 <script type="text/template" id="bookmark-template">
-<div>
 <ul></ul>
-</div>
 </script>
 
 <script type="text/template" id="bookmark-item-template">
@@ -31,7 +27,9 @@
 </script>
 
 <script type="text/template" id="tag-item-template">
-<%= tags %>
+<% _.each(tags, function(tag){ %>
+  <a href="#tag/<%= tag %>"><li><%= tag %></li></a>
+<% }); %>
 </script>
 
 

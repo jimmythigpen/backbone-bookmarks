@@ -1,4 +1,4 @@
-(function(){
+  (function(){
 
 
 //
@@ -30,7 +30,7 @@ var TagView = Backbone.View.extend({
     this.$el.html(this.template());
       this.children = this.collection.map(function(tag){
       var tagItemView = new TagItemView({model: tag});
-      self.$('ul').append(tagItemView.render().el);
+      $('.js-tag-view').append(tagItemView.render().el);
     });
   }
 
@@ -40,7 +40,7 @@ var TagView = Backbone.View.extend({
 // Tag Item View
 //
 var TagItemView = Backbone.View.extend({
-  tagName: 'li',
+  tagName: 'ul',
   template: _.template($('#tag-item-template').text()),
 
   render: function(){
