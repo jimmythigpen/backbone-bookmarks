@@ -15,17 +15,37 @@
 //
 var TagView = Backbone.View.extend({
 
-createTags: function(){
-  this.tagArrays = this.collection.pluck('tags');
-  this.tagArray = _.uniq(_.flatten(this.tagArrays));
-  console.log(this.tagArray);
-},
+  template: _.template($('#tag-template').text()),
+
+  createTags: function(){
+    this.tagArrays = this.collection.pluck('tags');
+    this.tagArray = _.uniq(_.flatten(this.tagArrays));
+  },
+
+  render: function(){
+    // console.log($.extend({}, this.tagArray));
+    this.children = this.tagArray.map(function(tag){
+      var tagItemView = new TagItemView({model: tag});
+      self.$('ul').append(tagItemView.render().el);
+    });
+  }
 
 });
 
 //
 // Tag Item View
 //
+var TagItemView = Backbone.View.extend({
+  tagName: 'li',
+  template: _.template($('#tag-item-template').text()),
+
+  render: function(){
+    console.log(this.model);
+    this.$el.html(this.template(this.model));
+    return this;
+}
+
+});
 
 
 //
@@ -95,6 +115,7 @@ var AppRouter = Backbone.Router.extend({
     console.log('index');
     this.bookMarkView.render();
     this.tagView.createTags();
+    this.tagView.render();
 
 
 
