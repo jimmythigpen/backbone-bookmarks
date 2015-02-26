@@ -63,7 +63,7 @@ var BookMarkView = Backbone.View.extend({
     this.$el.html(this.template());
     this.children = this.collection.map(function(bookmark){
       var bookMarkItemView = new BookMarkItemView({model: bookmark});
-      self.$('ul').append(bookMarkItemView.render().el);
+      self.$('.js-bookmark-list').append(bookMarkItemView.render().el);
       // return bookMarkItemView;
     });
     // return this;

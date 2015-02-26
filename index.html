@@ -16,19 +16,28 @@
 </script>
 
 <script type="text/template" id="bookmark-template">
-<ul></ul>
+<ul class='js-bookmark-list'>
+
+
+</ul>
 </script>
 
 <script type="text/template" id="bookmark-item-template">
 <h5><%= title %></h5>
 <div><a href="<%= url %>"><%= url %></a></div>
 <div><%= description %></div>
-<div><%= tags %></div>
+<ul>
+  <% _.each(tags, function(tag){ %>
+  <li class="inline-tags"><a href="#tag/<%= tag %>"><%= tag %></a></li>
+<% }); %>
+</ul>
+
+
 </script>
 
 <script type="text/template" id="tag-item-template">
 <% _.each(tags, function(tag){ %>
-  <a href="#tag/<%= tag %>"><li><%= tag %></li></a>
+  <li><a href="#tag/<%= tag %>"><%= tag %></a></li>
 <% }); %>
 </script>
 
